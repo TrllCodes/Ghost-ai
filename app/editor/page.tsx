@@ -8,7 +8,7 @@ export default function EditorPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="h-screen bg-bg-base">
+    <div className="min-h-screen bg-bg-base">
       <EditorNavbar
         isSidebarOpen={sidebarOpen}
         onToggleSidebar={() => setSidebarOpen((prev) => !prev)}
@@ -17,7 +17,7 @@ export default function EditorPage() {
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
-      <main className="pt-12 h-full flex items-center justify-center">
+      <main className="pt-12 min-h-[calc(100vh-3rem)] flex items-center justify-center">
         <p className="text-text-muted text-sm">Editor canvas</p>
       </main>
     </div>

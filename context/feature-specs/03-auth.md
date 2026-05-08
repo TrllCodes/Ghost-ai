@@ -1,4 +1,4 @@
-Clerk is already installed and connected. Wire it into the Next.js app: provider, auth pages, rediorects, route protection, and user menu.
+Clerk is already installed and connected. Wire it into the Next.js app: provider, auth pages, redirects, route protection, and user menu.
 
 ## Design
 
@@ -32,7 +32,7 @@ Define public routes using the existing sign-in and sign-up env vars. Protect ev
 Update `/`:
 
 - authenticated users redirect to `/editor`
-- unauthenticated users redirect tp `/sign-in`
+- unauthenticated users redirect to `/sign-in`
 
 Add Clerk's built-in `UserButton` to the editor navbar right section for profile settings and logout.
 
