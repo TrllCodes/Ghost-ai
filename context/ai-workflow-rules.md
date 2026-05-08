@@ -29,7 +29,7 @@ If a change cannot be verified end-to-end quickly, the scope is too broad — sp
 
 ## Protected Files
 
-Do not modify generated third-party foundation componemnts unless explicitly instructed.
+Do not modify generated third-party foundation components unless explicitly instructed.
 
 This includes:
 
