@@ -24,8 +24,12 @@ export async function POST(request: NextRequest) {
 
   const body = await request.json().catch(() => ({}));
   const name: string = body.name?.trim() || "Untitled Project";
+  const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
   const id: string | undefined =
-    typeof body.id === "string" && body.id.trim() ? body.id.trim() : undefined;
+    typeof body.id === "string" && body.id.trim() && UUID_REGEX.test(body.id.trim())
+      ? body.id.trim()
+      : undefined;
 
   const project = await prisma.project.create({
     data: { ...(id ? { id } : {}), ownerId: userId, name },

@@ -4,17 +4,16 @@ import { PrismaPg } from "@prisma/adapter-pg";
 type PrismaGlobal = typeof globalThis & { prisma?: PrismaClient };
 
 const g = globalThis as PrismaGlobal;
-const rawUrl = process.env.DATABASE_URL;
-
-if (!rawUrl) {
-  throw new Error(
-    "DATABASE_URL environment variable is required but not set"
-  );
-}
-
-const url: string = rawUrl;
 
 function createClient(): PrismaClient {
+  const rawUrl = process.env.DATABASE_URL;
+  if (!rawUrl) {
+    throw new Error(
+      "DATABASE_URL environment variable is required but not set"
+    );
+  }
+  const url: string = rawUrl;
+
   if (url.startsWith("prisma+postgres://")) {
     // Accelerate path: install @prisma/extension-accelerate and update this branch
     throw new Error(

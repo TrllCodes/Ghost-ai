@@ -20,7 +20,7 @@ When creating:
 
 Security:
 
-- unatuthenticated requests return `401`
+- unauthenticated requests return `401`
 - only the project owner can rename or delete
 - non-owner mutations return `403`
 
@@ -30,6 +30,6 @@ Keep this backend-only. Do not wire the UI yet.
 ## Check When Done
 
 - routes exist for list/create/rename/delete
-- owner checls are enforced for rename/delete
+- owner checks are enforced for rename/delete
 - `401` and `403` responses are handled correctly
 - `npm run build` passes
