@@ -4,13 +4,23 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Complete
+- UI — Project Dialogs
 
 ## Current Goal
 
-- Define the immediate implementation goal here.
+- None.
 
 ## Completed
+
+- **Project Dialogs (04-project-dialogs)**
+  - `lib/mock-projects.ts` — `MockProject` interface, `MOCK_PROJECTS` seed data, `toSlug()` helper
+  - `hooks/use-project-dialogs.ts` — manages dialog kind, target project, form values, loading state, and mock CRUD mutations
+  - `components/editor/create-project-dialog.tsx` — name input with live slug preview; Enter submits
+  - `components/editor/rename-project-dialog.tsx` — prefilled name input; current name in description; Enter submits; auto-focuses
+  - `components/editor/delete-project-dialog.tsx` — destructive confirm; no input; error-styled confirm button
+  - `app/editor/page.tsx` — centered home screen (heading + description + New Project button); all three dialogs mounted; wired to `useProjectDialogs`
+  - `components/editor/project-sidebar.tsx` — project list with rename/delete actions on owned items (hidden on shared); mobile backdrop scrim + tap-outside-to-close; New Project button wired
+  - `npm run build` passes
 
 - **Auth (03-auth)**
   - `@clerk/ui` installed (v1.9.0) for bundled UI and `dark` theme
@@ -45,11 +55,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Next Up
 
-- Add the next planned feature unit here.
+- None.
 
 ## Open Questions
 
-- Add unresolved product or implementation questions here.
+- None.
 
 ## Architecture Decisions
 
