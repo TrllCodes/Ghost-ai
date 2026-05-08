@@ -23,8 +23,14 @@ prisma migrate status [options]
 
 | Option | Description |
 |--------|-------------|
-| `--schema` | Path to schema file |
-| `--config` | Custom path to your Prisma config file |
+| `--schema` | Path to the schema.prisma file |
+| `-h, --help` | Show help for the command |
+
+## Global Options
+
+| Option | Description |
+|--------|-------------|
+| `--config` | Custom path to your Prisma config file (inherited from the `prisma` command group) |
 
 ## Examples
 
@@ -35,13 +41,11 @@ prisma migrate status
 ```
 
 Output example (Up to date):
-```
-Database schema is up to date!
-```
+
 
 Output example (Pending):
-```
-Following migration have not yet been applied:
+```text
+Following migrations have not yet been applied:
   20240115120000_add_user
 
 To apply migrations in development, run:
@@ -59,7 +63,7 @@ To apply migrations in production, run:
 
 ## Exit Codes
 
-- `0`: Success (may have pending migrations, but command ran successfully)
-- `1`: Error
+- `0`: Everything is in sync (no pending migrations, no divergence, no failed migrations)
+- `1`: Failure — covers unapplied migrations, schema divergence, failed migrations, connection errors, or a missing `_prisma_migrations` table
 
-To check for pending migrations programmatically, you might need to parse the output or use `migrate diff` with exit code flags.
+For programmatic checks, use `migrate diff` with `--exit-code` (exits `2` when a diff exists) or parse the CLI output directly.

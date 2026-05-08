@@ -73,7 +73,7 @@ prisma generate --sql
 ```prisma
 generator client {
   provider = "prisma-client"
-  output   = "../generated"
+  output   = "../generated/prisma"
 }
 ```
 
@@ -97,7 +97,7 @@ Use `compilerBuild` when you need to trade artifact size against the default bui
 ```prisma
 generator client {
   provider      = "prisma-client"
-  output        = "../generated"
+  output        = "../generated/prisma"
   compilerBuild = "small"
 }
 ```
@@ -130,7 +130,7 @@ Run before building your application.
 ```prisma
 generator client {
   provider = "prisma-client"
-  output   = "../generated"
+  output   = "../generated/prisma"
 }
 
 generator zod {
@@ -147,8 +147,8 @@ prisma generate  # Runs all generators
 
 After running `prisma generate`, your output directory contains:
 
-```
-generated/
+```text
+generated/prisma/
 ├── browser.ts
 ├── client.ts
 ├── commonInputTypes.ts

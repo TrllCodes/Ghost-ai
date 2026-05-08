@@ -27,7 +27,7 @@ Do not add extra fields unless required by Prisma.
 
 ## Prisma Client
 
-Create `lib/prisma.ts` as a cashed singleton.
+Create `lib/prisma.ts` as a cached singleton.
 
 Branch by `DATABASE_URL`:
 

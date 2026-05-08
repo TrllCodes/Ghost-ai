@@ -4,9 +4,7 @@ Management API endpoint details for database setup workflows.
 
 ## List regions
 
-```
-GET /v1/regions/postgres
-```
+
 
 No request body. Returns available Prisma Postgres regions.
 

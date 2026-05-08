@@ -217,26 +217,7 @@ import 'dotenv/config'
 
 See individual rule files for detailed command documentation:
 
-```
-references/init.md           - Project initialization
-references/generate.md       - Client generation
-references/dev.md            - Local development database
-references/db-pull.md        - Database introspection
-references/db-push.md        - Schema push
-references/db-seed.md        - Database seeding
-references/db-execute.md     - Raw SQL execution
-references/migrate-dev.md    - Development migrations
-references/migrate-deploy.md - Production migrations
-references/migrate-reset.md  - Database reset
-references/migrate-status.md - Migration status
-references/migrate-resolve.md - Migration resolution
-references/migrate-diff.md   - Schema diffing
-references/studio.md         - Database GUI
-references/mcp.md            - Prisma MCP server
-references/validate.md       - Schema validation
-references/format.md         - Schema formatting
-references/debug.md          - Debug info
-```
+
 
 ## How to Use
 

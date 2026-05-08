@@ -1,6 +1,5 @@
 "use client";
 
-import { toSlug } from "@/lib/mock-projects";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -15,6 +14,7 @@ import {
 interface CreateProjectDialogProps {
   open: boolean;
   name: string;
+  roomId: string;
   loading: boolean;
   onNameChange: (value: string) => void;
   onSubmit: () => void;
@@ -24,13 +24,12 @@ interface CreateProjectDialogProps {
 export function CreateProjectDialog({
   open,
   name,
+  roomId,
   loading,
   onNameChange,
   onSubmit,
   onClose,
 }: CreateProjectDialogProps) {
-  const slug = toSlug(name);
-
   return (
     <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <DialogContent showCloseButton>
@@ -52,7 +51,7 @@ export function CreateProjectDialog({
           />
           {name.trim() && (
             <p className="text-xs text-text-muted">
-              Slug: <span className="text-text-secondary font-mono">{slug}</span>
+              Room ID: <span className="text-text-secondary font-mono">{roomId}</span>
             </p>
           )}
         </div>

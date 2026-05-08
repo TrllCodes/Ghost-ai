@@ -176,16 +176,7 @@ For MongoDB, stay on the latest Prisma 6.x line and keep the connection URL in `
 
 See individual rule files for detailed setup instructions:
 
-```
-references/postgresql.md
-references/mysql.md
-references/sqlite.md
-references/mongodb.md
-references/sqlserver.md
-references/cockroachdb.md
-references/prisma-postgres.md
-references/prisma-client-setup.md
-```
+
 
 ## How to Use
 
