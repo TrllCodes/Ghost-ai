@@ -18,7 +18,7 @@ Ghost AI is a real-time collaborative system design workspace. Users describe a 
 1. User signs in.
 2. User creates or selects a project.
 3. User enters the project workspace.
-4. User optionally impoorts a starter system design template into the canvas.
+4. User optionally imports a starter system design template into the canvas.
 5. User prompts the AI to generate or extend the system design.
 6. AI generates nodes and edges in the shared canvas.
 7. Collaborators edit and refine the design.
@@ -42,15 +42,15 @@ Ghost AI is a real-time collaborative system design workspace. Users describe a 
 
 ### Starter System Designs
 
-- A curated library of prebilt system design templates.
-- Users can import a strter template into the canvas at any point during editing.
+- A curated library of prebuilt system design templates.
+- Users can import a starter template into the canvas at any point during editing.
 - Templates are static canvas snapshots loaded directly into the active room.
 - Covers common patterns: monolith, microservices, event-driven, serverless, and more.
 
 ### AI Architecture generation
 
 - AI generates a system design from a user-supplied prompt.
-- Output is structured as canvas nodes and edhes written into the shared room.
+- Output is structured as canvas nodes and edges written into the shared room.
 - Generation runs as a durable background task.
 
 ### Spec Generation

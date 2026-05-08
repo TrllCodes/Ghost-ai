@@ -1,7 +1,9 @@
 "use client";
 
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import { Wordmark } from "@/components/editor/wordmark";
 
 interface EditorNavbarProps {
   isSidebarOpen: boolean;
@@ -10,7 +12,7 @@ interface EditorNavbarProps {
 
 export function EditorNavbar({ isSidebarOpen, onToggleSidebar }: EditorNavbarProps) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 h-12 flex items-center px-3 bg-bg-surface border-b border-border-default">
+    <header className="fixed top-0 left-0 right-0 z-40 h-12 flex items-center px-3 bg-bg-surface border-b border-border-default relative">
       <div className="flex items-center">
         <Button
           variant="ghost"
@@ -18,6 +20,8 @@ export function EditorNavbar({ isSidebarOpen, onToggleSidebar }: EditorNavbarPro
           onClick={onToggleSidebar}
           className="h-8 w-8 text-text-muted hover:text-text-primary hover:bg-bg-elevated"
           aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
+          aria-expanded={isSidebarOpen}
+          aria-controls="project-sidebar"
         >
           {isSidebarOpen ? (
             <PanelLeftClose className="h-4 w-4" />
@@ -27,7 +31,12 @@ export function EditorNavbar({ isSidebarOpen, onToggleSidebar }: EditorNavbarPro
         </Button>
       </div>
       <div className="flex-1" />
-      <div className="flex items-center" />
+      <div className="absolute left-1/2 -translate-x-1/2 flex justify-center">
+        <Wordmark />
+      </div>
+      <div className="flex items-center">
+        <UserButton />
+      </div>
     </header>
   );
 }

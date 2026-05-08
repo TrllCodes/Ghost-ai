@@ -5,7 +5,7 @@
 - Keep modules small and single-purpose.
 - Fix root causes, do not layer workarounds.
 - Do not mix unrelated concerns in one component or route.
-- Respect the system boundaries defined in `architecture.md`.
+- Respect the system boundaries defined in `context/architecture-context.md`.
 
 ## TypeScript
 
@@ -25,7 +25,7 @@
 
 - Use CSS custom property tokens defined in `globals.css` — no raw Tailwind color classes like `zinc-*` or hardcoded hex values.
 - Reference tokens through their Tailwind utility names: `bg-base`, `text-copy-primary`, `border-surface-border`, `text-brand`, etc.
-- Maintain the border radius scale: `rounded-x1` for small elements, `rounded-2x1` for cards, `rounded-3x1` for modals.
+- Maintain the border radius scale: `rounded-sm` for small/inline elements, `rounded-xl` for cards/panels, `rounded-3xl` for modals/overlays.
 
 ## API Routes
 
@@ -47,4 +47,4 @@
 - `trigger/` — all durable background tasks and AI workflows.
 - `components/` — UI composition only; no business logic.
 - `app/api/` — route handlers for auth, triggering, and persistence.
-- Name files afte the responsibility they contain, not the technology.
+- Name files after the responsibility they contain, not the technology.

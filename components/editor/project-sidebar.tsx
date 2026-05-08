@@ -12,6 +12,9 @@ interface ProjectSidebarProps {
 export function ProjectSidebar({ isOpen, onClose }: ProjectSidebarProps) {
   return (
     <div
+      id="project-sidebar"
+      aria-hidden={!isOpen}
+      inert={!isOpen}
       className={`fixed top-12 left-0 bottom-0 z-30 w-72 flex flex-col bg-bg-surface border-r border-border-default transition-transform duration-200 ease-in-out ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
