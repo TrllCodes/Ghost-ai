@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { X, Plus, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,6 +11,7 @@ interface ProjectSidebarProps {
   onClose: () => void;
   ownedProjects: Project[];
   sharedProjects: Project[];
+  activeProjectId?: string;
   onNewProject: () => void;
   onRenameProject: (project: Project) => void;
   onDeleteProject: (project: Project) => void;
@@ -18,14 +20,20 @@ interface ProjectSidebarProps {
 interface ProjectItemProps {
   project: Project;
   owned: boolean;
+  active: boolean;
   onRename: (project: Project) => void;
   onDelete: (project: Project) => void;
 }
 
-function ProjectItem({ project, owned, onRename, onDelete }: ProjectItemProps) {
+function ProjectItem({ project, owned, active, onRename, onDelete }: ProjectItemProps) {
   return (
-    <div className="group flex items-center justify-between rounded-sm px-2 py-1.5 hover:bg-bg-elevated">
-      <span className="text-sm text-text-secondary truncate">{project.name}</span>
+    <div className={`group flex items-center justify-between rounded-sm px-2 py-1.5 hover:bg-bg-elevated ${active ? "bg-bg-elevated" : ""}`}>
+      <Link
+        href={`/editor/${project.id}`}
+        className={`flex-1 text-sm truncate min-w-0 ${active ? "text-text-primary font-medium" : "text-text-secondary"}`}
+      >
+        {project.name}
+      </Link>
       {owned && (
         <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
           <Button
@@ -57,6 +65,7 @@ export function ProjectSidebar({
   onClose,
   ownedProjects,
   sharedProjects,
+  activeProjectId,
   onNewProject,
   onRenameProject,
   onDeleteProject,
@@ -116,6 +125,7 @@ export function ProjectSidebar({
                       key={project.id}
                       project={project}
                       owned={true}
+                      active={activeProjectId === project.id}
                       onRename={onRenameProject}
                       onDelete={onDeleteProject}
                     />
@@ -136,6 +146,7 @@ export function ProjectSidebar({
                       key={project.id}
                       project={project}
                       owned={false}
+                      active={activeProjectId === project.id}
                       onRename={onRenameProject}
                       onDelete={onDeleteProject}
                     />

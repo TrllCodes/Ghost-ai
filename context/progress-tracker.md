@@ -4,13 +4,29 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Frontend — Editor Home Wired to Real API (complete)
+- Frontend — Share Dialog (complete)
 
 ## Current Goal
 
-- Editor home is fully wired to the real project API. Next: canvas setup (Liveblocks + React Flow).
+- Share dialog is fully implemented. Next: canvas setup (Liveblocks + React Flow).
 
 ## Completed
+
+- **Share Dialog (09-share-dialog)**
+  - `app/api/projects/[projectId]/collaborators/route.ts` — `GET` returns enriched collaborator list (Clerk `displayName` + `avatarUrl`, falls back to email-only); access requires owner or collaborator membership; `POST` invites a collaborator by email (owner only), upsert prevents duplicates
+  - `app/api/projects/[projectId]/collaborators/[collaboratorEmail]/route.ts` — `DELETE` removes a collaborator by URL-decoded email (owner only)
+  - `components/editor/share-dialog.tsx` — `ShareDialog` client component; fetches and renders collaborator list on open; owners can invite by email and remove collaborators; collaborators see read-only list; copy-link button writes `window.location.href` with temporary "Copied!" feedback; avatars load from Clerk, fall back to initial-letter placeholder
+  - `app/editor/[roomId]/workspace-shell.tsx` — added `isOwner: boolean` prop; Share button now opens `ShareDialog`; `ShareDialog` rendered alongside project dialogs
+  - `app/editor/[roomId]/page.tsx` — passes `isOwner={project.ownerId === identity.userId}` to `WorkspaceShell`
+  - `npm run build` passes
+
+- **Editor Workspace Shell (08-editor-workspace-shell)**
+  - `lib/project-access.ts` — `getClerkIdentity()` returns `{ userId, email }` from Clerk; `getProjectWithAccess(projectId, userId, email)` checks project ownership or collaborator membership and returns the project or `null`
+  - `components/editor/access-denied.tsx` — centered layout with lock icon, short message, and link back to `/editor`; used for missing or unauthorized projects
+  - `components/editor/project-sidebar.tsx` — added optional `activeProjectId?: string` prop; active project item highlighted with `bg-bg-elevated` and bold text
+  - `app/editor/[roomId]/page.tsx` — async server component; unauthenticated users redirect to `/sign-in`; missing or unauthorized projects render `AccessDenied`; authorized users receive the full workspace
+  - `app/editor/[roomId]/workspace-shell.tsx` — client shell managing sidebar and AI sidebar toggle state; navbar shows project name, share button (placeholder), and AI sidebar toggle; `ProjectSidebar` rendered with current room highlighted; canvas placeholder with dark background and centered message; right sidebar placeholder for AI chat
+  - `npm run build` passes
 
 - **Wire Editor Home (07-wire-editor-home)**
   - `lib/slug.ts` — `toSlug()` helper (moved from deleted `lib/mock-projects.ts`); `buildRoomId(name, suffix)` produces `{slug}-{suffix}` room ID
@@ -78,12 +94,13 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Next Up
 
-- Canvas setup (Liveblocks + React Flow).
+- Canvas setup (Liveblocks + React Flow) — wire up Liveblocks room token issuance and React Flow canvas inside `/editor/[roomId]`.
+
+
 
 ## Open Questions
 
 - **Accelerate branch in `lib/prisma.ts`**: the `prisma+postgres://` code path throws at runtime. If the deployment URL ever switches to Accelerate, `@prisma/extension-accelerate` must be installed and that branch implemented before deploy.
-- **Collaborator identity**: `ProjectCollaborator` stores email, but Clerk identifies users by ID. The email-to-Clerk-user lookup strategy (e.g. Clerk Backend API) hasn't been decided yet. Currently `getEditorProjects()` resolves shared projects by matching the user's primary email against `ProjectCollaborator.email`.
 
 ## Architecture Decisions
 
@@ -95,6 +112,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Session Notes
 
+- Collaborator identity resolved: `ProjectCollaborator` stores email; `GET /api/projects/[projectId]/collaborators` enriches each email via `clerkClient().users.getUserList({ emailAddress: [...] })` in a single batched call. Falls back to email-only if Clerk lookup fails or returns no match.
 - The Prisma client output is at `app/generated/prisma` — import from `@/app/generated/prisma/client`, not from `@prisma/client`.
 - API routes use `auth()` from `@clerk/nextjs/server` to get `userId`; `params` in dynamic routes must be awaited (`await params`) per Next.js 16 conventions.
 - `prisma.config.ts` reads `DATABASE_URL` via `dotenv/config` (loads `.env`). The same value must exist in `.env.local` for Next.js runtime and in `.env` for Prisma CLI commands.
